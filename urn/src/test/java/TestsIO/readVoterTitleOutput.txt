@@ -1,0 +1,3 @@
+Bem vindo, esta é a urna eletrônica do STE.
+
+	Insira voto para presidente (2 dígitos ou escreva branco/nulo): 	Insira voto para deputado (4 dígitos ou escreva branco/nulo): 	Insira voto para deputado (4 dígitos ou escreva branco/nulo): 
