@@ -16,8 +16,10 @@ public class UrnTest {
     public static boolean compareByMemoryMappedFiles(Path path1, Path path2) throws IOException {
         try (RandomAccessFile randomAccessFile1 = new RandomAccessFile(path1.toFile(), "r");
                 RandomAccessFile randomAccessFile2 = new RandomAccessFile(path2.toFile(), "r")) {
+        	
             FileChannel ch1 = randomAccessFile1.getChannel();
             FileChannel ch2 = randomAccessFile2.getChannel();
+            
             if (ch1.size() != ch2.size()) {
                 return false;
             }
@@ -32,7 +34,7 @@ public class UrnTest {
     public void StartOfVotingSession_CorrectPassword_Success() throws IOException {
         System.setIn(new FileInputStream(pathToTestFiles + "tryToStartInput.txt"));
         System.setOut(new PrintStream(pathToTestFiles + "tryToStartOutput.txt"));
-
+        
         Urn urn = new Urn();
         urn.tryToStart();
 
@@ -100,6 +102,7 @@ public class UrnTest {
         Urn urn = new Urn();
         urn.tryToStart();
         urn.tryToEnd();
+        
         assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "tryToEndOutput.txt"),
                 Paths.get(pathToTestFiles + "tryToEndExpectedOutput.txt")));
     }

@@ -15,7 +15,7 @@ public class Urn {
 
     // =========================================================================
     public Urn() {
-        System.out.print("Bem vindo, esta é a urna eletrônica do STE.\n\n");
+        System.out.print("Bem vindo, esta é a urna eletrônica do STE.\r\n\r\n");
         //
         this.startPasswordUsed = "";
         this.db = new DataBase();
@@ -77,14 +77,14 @@ public class Urn {
         if (voter != null) {
             // If the voter has already voted
             if (voter.hasVoted()) {
-                System.out.print("Eleitor já votou!\n");
+                System.out.print("Eleitor já votou!\r\n");
                 return "";
             }
             return title;
         }
 
         // If the title is invalid
-        System.out.print("Título inválido!\n");
+        System.out.print("Título inválido!\r\n");
         return "";
     }
 
