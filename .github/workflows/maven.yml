@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file TP_TS\urn\pom.xml
+      run: mvn --batch-mode --update-snapshots verify
     - name: Test
       run: mvn test
 
