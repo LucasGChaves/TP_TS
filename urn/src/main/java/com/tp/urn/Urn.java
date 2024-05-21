@@ -190,6 +190,9 @@ public class Urn {
      * and deleted.
      * 
      */
+    
+    //Comentário aleatório
+    
     public void tryToEnd() {
         for (int i = 0; i < 3; i++) {
             System.out.print("Insira senha para finalizar sessão: ");
