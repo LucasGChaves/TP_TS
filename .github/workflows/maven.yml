@@ -33,6 +33,8 @@ jobs:
       run: mvn -B package --file urn/pom.xml
     - name: Test
       run: mvn test --file urn/pom.xml
+    - name: Update Dependency Graph
+      run: mvn com.github.ferstl:depgraph-maven-plugin:4.0.1:graph --file urn/pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
