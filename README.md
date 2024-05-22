@@ -1,9 +1,9 @@
 # Trabalho Prático de Teste de Software
 ## 1. Grupo
-Frederico Abbud Reis
-Joao Lucas Rocha dos Santos
-Lucas Braz Rossetti
-Lucas Gabriel Silveira Chaves
+Frederico Abbud Reis <br/>
+Joao Lucas Rocha dos Santos <br/>
+Lucas Braz Rossetti <br/>
+Lucas Gabriel Silveira Chaves <br/>
 
 ## 2. Sobre o sistem
 O sistema é uma implementação simplificada de uma urna eletrônica, similar à utilizada nas eleições brasileiras. As entidades que constituem o sistema são: `Urn`, `Candidate`, `Credential`, `Party`, `Voter`.
