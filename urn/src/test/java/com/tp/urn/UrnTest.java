@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 public class UrnTest {
     String pathToTestFiles = "src/test/java/TestsIO/";
 
-    
     public static boolean compareByMemoryMappedFiles(Path path1, Path path2) throws IOException {
         try (RandomAccessFile randomAccessFile1 = new RandomAccessFile(path1.toFile(), "r");
                 RandomAccessFile randomAccessFile2 = new RandomAccessFile(path2.toFile(), "r")) {
@@ -119,7 +118,53 @@ public class UrnTest {
         assertFalse(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "tryToEndOutput2.txt"),
                 Paths.get(pathToTestFiles + "tryToEndExpectedOutput.txt")));
     }
-
+    
+    @Test
+    public void TryToEnd_WrongTitleFormat() throws IOException {
+        System.setOut(new PrintStream(pathToTestFiles + "wrongTitleFormatOutput.txt"));
+        System.setIn(new FileInputStream(pathToTestFiles + "wrongTitleFormatInput.txt"));
+    	
+    	Urn urn = new Urn();
+    	urn.autenticateVoter();
+    	
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "wrongTitleFormatOutput.txt"),
+                Paths.get(pathToTestFiles + "wrongTitleFormatOutputExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void TryToEnd_WrongTitleFormatSpecialCharacters() throws IOException {
+        System.setOut(new PrintStream(pathToTestFiles + "wrongTitleFormatSpecialCharactersOutput.txt"));
+        System.setIn(new FileInputStream(pathToTestFiles + "wrongTitleFormatSpecialCharactersInput.txt"));
+    	
+    	Urn urn = new Urn();
+    	urn.autenticateVoter();
+    	
+    	assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "wrongTitleFormatSpecialCharactersOutput.txt"),
+                Paths.get(pathToTestFiles + "wrongTitleFormatSpecialCharactersExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void TryToEnd_UserEndsSession() throws IOException {
+        System.setOut(new PrintStream(pathToTestFiles + "userEndsSessionOutput.txt"));
+        System.setIn(new FileInputStream(pathToTestFiles + "userEndsSessionInput.txt"));
+    	
+    	Urn urn = new Urn();
+        String result = urn.autenticateVoter();
+        assertEquals("-1", result);
+    }
+    
+    @Test
+    public void TryToEnd_EmptyTitle() throws IOException {
+        System.setOut(new PrintStream(pathToTestFiles + "emptyTitleOutput.txt"));
+        System.setIn(new FileInputStream(pathToTestFiles + "emptyTitleInput.txt"));
+    	
+    	Urn urn = new Urn();
+        urn.autenticateVoter();
+        
+    	assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "emptyTitleOutput.txt"),
+                Paths.get(pathToTestFiles + "emptyTitleOutputExpectedOutput.txt")));
+    }
+    
     @Test
     public void Main_110Inputs_RunsBefore1Sec() throws FileNotFoundException {
         System.setIn(new FileInputStream(new File(pathToTestFiles + "performanceTest.txt")));
