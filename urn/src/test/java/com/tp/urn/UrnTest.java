@@ -304,5 +304,28 @@ public class UrnTest {
         assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "contabilizationOutput.txt"),
                 Paths.get(pathToTestFiles + "contabilizationExpectedOutput.txt")));
     }
+    
+    @Test
+    public void testPresidenceTies() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "readVoterTitleTiePresidenceInput.txt"));
+        
+        Urn urn = new Urn();
+        urn.tryToStart();
+        System.setOut(new PrintStream(pathToTestFiles + "readVoterTitleTiePresidenceOutput.txt"));
+        urn.tryToEnd();
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "readVoterTitleTiePresidenceOutput.txt"),
+                Paths.get(pathToTestFiles + "readVoterTitleTiePresidenceExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void testCongressmenTies() throws IOException {
+    	System.setIn(new FileInputStream(pathToTestFiles + "readVoterTitleTieCongressInput.txt"));
 
+        Urn urn = new Urn();
+        urn.tryToStart();
+        System.setOut(new PrintStream(pathToTestFiles + "readVoterTitleTieCongressOutput.txt"));
+        urn.tryToEnd();
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "readVoterTitleTieCongressOutput.txt"),
+                Paths.get(pathToTestFiles + "readVoterTitleTieCongressExpectedOutput.txt")));
+    }
 }

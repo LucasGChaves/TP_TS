@@ -1,0 +1,4 @@
+Insira senha para finalizar sessão: Insira senha para finalizar sessão: Insira senha para finalizar sessão: Sessão finalizada sem sucesso (estouro de 3 tentativas para finalizar).
+Bem vindo, esta é a urna eletrônica do STE.
+
+Insira a senha de início de votação: 
