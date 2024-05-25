@@ -1,0 +1,9 @@
+Bem vindo, esta é a urna eletrônica do STE.
+
+Insira a senha de início de votação: Insira seu título de eleitor: 	Insira voto para presidente (2 dígitos ou escreva branco/nulo): 	Candidato não existe. Voto nulo.
+	Insira voto para deputado (4 dígitos ou escreva branco/nulo): 	Candidato não existe. Voto nulo.
+	Insira voto para deputado (4 dígitos ou escreva branco/nulo): 	Candidato não existe. Voto nulo.
+
+Insira senha para finalizar sessão: Sessão encerrada com sucesso!
+==== RESULTADO DA ELEIÇÃO ====
+==== Sessão eleitoral invalidada devido à falta de votos em um ou mais cargos.

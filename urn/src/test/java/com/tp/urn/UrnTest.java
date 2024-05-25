@@ -195,5 +195,114 @@ public class UrnTest {
 
         assertTrue(end - start < 1000);
     }
+    
+    @Test
+    public void ReadVoterCandidates_VoteNull_Success() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "nullVoteInput.txt"));
+        System.setOut(new PrintStream(pathToTestFiles + "nullVoteOutput.txt"));
+
+        Urn urn = new Urn();
+        urn.tryToStart();
+        String voterTitle = urn.autenticateVoter();
+        urn.readVoterCandidates(voterTitle);
+        urn.tryToEnd();
+
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "nullVoteOutput.txt"),
+                Paths.get(pathToTestFiles + "nullVoteExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void ReadVoterCandidates_VoteBranco_Success() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "votoBrancoInput.txt"));
+        System.setOut(new PrintStream(pathToTestFiles + "brancoVoteOutput.txt"));
+
+        Urn urn = new Urn();
+        urn.tryToStart();
+        String voterTitle = urn.autenticateVoter();
+        urn.readVoterCandidates(voterTitle);
+        urn.tryToEnd();
+
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "brancoVoteOutput.txt"),
+                Paths.get(pathToTestFiles + "brancoExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void NullElectionWithMixedInvalidVotes() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "mixedVoteInput.txt"));
+        System.setOut(new PrintStream(pathToTestFiles + "mixedVoteOutput.txt"));
+
+        Urn urn = new Urn();
+        urn.tryToStart();
+        String voterTitle = urn.autenticateVoter();
+        urn.readVoterCandidates(voterTitle);
+        urn.tryToEnd();
+
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "mixedVoteOutput.txt"),
+                Paths.get(pathToTestFiles + "brancoExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void NullIfVoteInexistentVote() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "inexistentCandidate.txt"));
+        System.setOut(new PrintStream(pathToTestFiles + "inexistentCandidateOutput.txt"));
+
+        Urn urn = new Urn();
+        urn.tryToStart();
+        String voterTitle = urn.autenticateVoter();
+        urn.readVoterCandidates(voterTitle);
+        urn.tryToEnd();
+
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "inexistentCandidateOutput.txt"),
+                Paths.get(pathToTestFiles + "inexistentCandidateExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void AllTypesOfNullVote() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "allTypesNullInput.txt"));
+        System.setOut(new PrintStream(pathToTestFiles + "allTypesNullOutput.txt"));
+
+        Urn urn = new Urn();
+        urn.tryToStart();
+        String voterTitle = urn.autenticateVoter();
+        urn.readVoterCandidates(voterTitle);
+        urn.tryToEnd();
+
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "allTypesNullOutput.txt"),
+                Paths.get(pathToTestFiles + "allTypesNullExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void AuthenticateVoter_TryToVoteTwice_Failure() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "AlreadyVotedInput.txt"));
+        System.setOut(new PrintStream(pathToTestFiles + "AlreadyVotedOutput.txt"));
+
+        Urn urn = new Urn();
+        urn.tryToStart();
+        String voterTitle = urn.autenticateVoter();
+        urn.readVoterCandidates(voterTitle);
+
+        // Tentar votar novamente
+        String secondAttempt = urn.autenticateVoter();
+        assertEquals("", secondAttempt);
+
+        urn.tryToEnd();
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "AlreadyVotedOutput.txt"),
+                Paths.get(pathToTestFiles + "AlreadyVotedExpectedOutput.txt")));
+    }
+    
+    @Test
+    public void TestAllValidVotes() throws IOException {
+        System.setIn(new FileInputStream(pathToTestFiles + "contabilizationInput.txt"));
+        System.setOut(new PrintStream(pathToTestFiles + "contabilizationOutput.txt"));
+
+        Urn urn = new Urn();
+        urn.tryToStart();
+        String voterTitle = urn.autenticateVoter();
+        urn.readVoterCandidates(voterTitle);
+        urn.tryToEnd();
+
+        assertTrue(compareByMemoryMappedFiles(Paths.get(pathToTestFiles + "contabilizationOutput.txt"),
+                Paths.get(pathToTestFiles + "contabilizationExpectedOutput.txt")));
+    }
 
 }
