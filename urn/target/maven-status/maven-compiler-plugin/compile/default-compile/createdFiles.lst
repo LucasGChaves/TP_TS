@@ -1,0 +1,9 @@
+com\tp\urn\DataBase\Party.class
+com\tp\urn\DataBase\Candidate.class
+com\tp\urn\DataBase\IDataBase.class
+com\tp\urn\DataBase\DataBase.class
+com\tp\urn\Urn.class
+com\tp\urn\DataBase\Credential.class
+com\tp\urn\DataBase\Voter.class
+com\tp\urn\DataBase\Statistics.class
+com\tp\urn\App.class
