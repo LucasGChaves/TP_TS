@@ -5,14 +5,13 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    
+
 permissions:
   contents: write
   security-events: write
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
@@ -23,19 +22,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file urn/pom.xml
-    - name: Test
-      run: mvn test --file urn/pom.xml
-    - name: Generate JaCoCo report
-      run: mvn jacoco:report --file urn/pom.xml
-    - name: Add coverage to PR
+    - name: Build and Test with Maven
+      run: mvn -B clean verify --file urn/pom.xml
+    - name: Upload JaCoCo Code Coverage Report
       id: jacoco
       uses: madrapps/jacoco-report@v1.6.1
       with:
-        paths: |
-          ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
-          ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
-        token: ${{ secrets.GITHUB_TOKEN }} 
-        min-coverage-overall: 40
+        paths: ${{ github.workspace }}/urn/target/site/jacoco/jacoco.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+        min-coverage-overall: 60
         min-coverage-changed-files: 60
