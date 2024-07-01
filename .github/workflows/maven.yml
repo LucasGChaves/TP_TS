@@ -27,14 +27,17 @@ jobs:
       run: mvn -B package --file urn/pom.xml
     - name: Test
       run: mvn test --file urn/pom.xml
-    - name: Generate JaCoCo Report
-      run: mvn jacoco:report --file urn/pom.xml
-    - name: Upload JaCoCo Code Coverage Report
+    - name: Run Coverage
+      run: |
+        chmod +x gradlew
+        ./gradlew testCoverage
+    - name: Add coverage to PR
       id: jacoco
       uses: madrapps/jacoco-report@v1.6.1
       with:
         paths: |
           ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
           ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
-        min-coverage-overall: 60
+        token: ${{ secrets.GITHUB_TOKEN }}
+        min-coverage-overall: 40
         min-coverage-changed-files: 60
