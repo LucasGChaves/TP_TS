@@ -25,6 +25,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file urn/pom.xml
+    - name: Prepare JaCoCo Agent
+      run: mvn jacoco:prepare-agent --file urn/pom.xml
     - name: Test
       run: mvn test --file urn/pom.xml
     - name: Generate JaCoCo report
